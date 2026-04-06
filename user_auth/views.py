@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+import logging
 
 # Create your views here.
 def login_(request):
@@ -25,7 +26,8 @@ def register(request):
         c=request.POST['email']
         d=request.POST['username']
         e=request.POST['password']
-        print(a,b,c,d,e)
+        logger = logging.getLogger(__name__)
+        logger.info(f"{a} {b} {c} {d}")
         try:
             v= User.objects.get(username=d)
             return render(request,'register.html',{'status':'username already exists'})
